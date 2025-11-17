@@ -4,6 +4,7 @@ const kbfifo = new Queue<string>(256);
 
 (self as any).winW = 80;
 (self as any).winH = 30;
+(self as any).lastkey = "ёпт";
 
 self.onmessage = async (event) => {
   if (typeof event.data === 'object' && 'dst' in event.data) switch (event.data.dst) {
@@ -18,8 +19,6 @@ self.onmessage = async (event) => {
 };
 
 const interval1 = setInterval(async () => await kbfifo.put("ёпт"), 250);
-
-(self as any).lastkey = "ёпт";
 
 (self as any).getKey = async () => {
   const key = await kbfifo.get();

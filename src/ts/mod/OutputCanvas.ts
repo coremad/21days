@@ -18,7 +18,7 @@ export class OutputCanvas implements Output {
     conf = {
         fontFamily: "'Consolas', 'Lucida Console', monospace",
         fontSize: 20,
-        scount: 1000,
+        scount: 100,
         wspace: 2,
         hspace: 2,
     };

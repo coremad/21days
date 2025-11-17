@@ -2,3 +2,5 @@ build
 *.tsbuildinfo
 .idea
 .vscode
+public/js/*
+

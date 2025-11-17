@@ -1,7 +1,7 @@
 import { OutputCanvas } from "./mod/OutputCanvas.js";
 import { Terminal } from "./mod/Terminal.js";
 
-const output = new OutputCanvas(document.getElementById('out-container'));
+const output = new OutputCanvas(document.getElementById('out-container'), 1);
 
 const term = new Terminal(output, true);
 
