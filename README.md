@@ -11,4 +11,4 @@ web wrapper for game "21days" from KolibriOS
 
 ## в онлайн
 
-[https://21days.pc.madcore.pro/](https://21days.pc.madcore.pro/)
+[https://21days.madcore.pro/](https://21days.madcore.pro/)
