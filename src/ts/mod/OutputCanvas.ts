@@ -102,7 +102,6 @@ export class OutputCanvas implements Output {
         this.needRefresh = false;
         this.ctx[this.workingLayer].fillStyle = this.bcolor;
         this.ctx[this.workingLayer].fillRect(0, 0, this.canvas[this.workingLayer].width, this.canvas[this.workingLayer].height);
-        console.log(this.layersNum + " " + this.workingLayer + "  " + this.visibleLayer);
     }
 
     clBlock(cx: number, cy: number, cw: number, ch: number): void {
