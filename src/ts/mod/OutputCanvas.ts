@@ -8,7 +8,7 @@ export class OutputCanvas implements Output {
     charHeight = 25;
     widthInChars = this.charWidth * 8;
     heightInChars = this.charHeight * 16;
-    needRefresh = false;
+    public needRefresh = false;
     bcolor = "darkslategrey";
     tcolor = "lightgrey";
     layersNum: 1 | 2 = 1;
@@ -23,7 +23,7 @@ export class OutputCanvas implements Output {
         hspace: 2,
     };
 
-    constructor(container: HTMLElement | null, layersNum: 1 | 2 = 1, extconf = {}) {
+    constructor(container: HTMLElement | null, layersNum: 1 | 2 = 2, extconf = {}) {
         if (!container) throw ("wtf?!");
         this.container = container;
         this.layersNum = layersNum;
@@ -39,6 +39,9 @@ export class OutputCanvas implements Output {
         }
 
         this.onResize()
+
+        this.workingLayer = this.layersNum == 1 ? 0 : 1;
+
         // this.offcanvas.push(new OffscreenCanvas(this.canvas[0].width, this.canvas[0].height));
     }
 
@@ -99,6 +102,7 @@ export class OutputCanvas implements Output {
         this.needRefresh = false;
         this.ctx[this.workingLayer].fillStyle = this.bcolor;
         this.ctx[this.workingLayer].fillRect(0, 0, this.canvas[this.workingLayer].width, this.canvas[this.workingLayer].height);
+        console.log(this.layersNum + " " + this.workingLayer + "  " + this.visibleLayer);
     }
 
     clBlock(cx: number, cy: number, cw: number, ch: number): void {

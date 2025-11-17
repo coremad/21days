@@ -21,6 +21,9 @@ self.onmessage = async (event) => {
 const interval1 = setInterval(async () => await kbfifo.put("ёпт"), 250);
 
 (self as any).getKey = async () => {
+  self.postMessage({
+    dst: "kbd",
+  });
   const key = await kbfifo.get();
   if (typeof key != 'string' || key == "ёпт") return false;
   (self as any).lastkey = key;

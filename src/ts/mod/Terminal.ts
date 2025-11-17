@@ -8,7 +8,7 @@ export class Terminal {
     dirtyLines: boolean[] = [];
     dirty = true;
 
-    constructor(output: Output, dirty = true) {
+    constructor(output: Output, dirty = false) {
         this.output = output;
         this.dirty = dirty;
         this.onResize();
@@ -33,6 +33,7 @@ export class Terminal {
             this.posX = this.posY = 0;
             this.output.cls();
         }
+        
     }
 
     rawPrint(s: string) {

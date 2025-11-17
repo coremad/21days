@@ -1,7 +1,7 @@
 import { OutputCanvas } from "./mod/OutputCanvas.js";
 import { Terminal } from "./mod/Terminal.js";
 
-const output = new OutputCanvas(document.getElementById('out-container'), 1);
+const output = new OutputCanvas(document.getElementById('out-container'), 2);
 
 const term = new Terminal(output, true);
 
@@ -23,6 +23,8 @@ worker.onmessage = async function (event) {
                     break;
             }
         }
+    } else if (event.data.dst === "kbd") {
+        output.refresh();
     } else console.log(event.data);
 };
 
@@ -40,4 +42,4 @@ window.onresize = function () {
     }, 2000);
 };
 
-const intervalId = setInterval(() => output.refresh(), 300);
+// const intervalId = setInterval(() => output.refresh(), 300);
