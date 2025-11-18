@@ -1,11 +1,22 @@
 import { OutputCanvas } from "./mod/OutputCanvas.js";
 import { Terminal } from "./mod/Terminal.js";
 
-const output = new OutputCanvas(document.getElementById('out-container'), 2);
+const output = new OutputCanvas(document.getElementById('out-container'), 2, true);
 
 const term = new Terminal(output, true);
 
-for (let i = 0; i < term.width * term.height; i++) term.print(i.toString()[0]);
+// const startTime = Date.now();
+// for (let n = 0; n < 10; n++) {
+//     for (let i = 0; i < term.width * term.height; i++) term.print(i.toString()[0]);
+//     term.goto(0, 0);
+//     for (let cy = 0; cy < 16; cy++) {
+//         term.goto(0, cy);
+//         for (let cx = 0; cx < 16; cx++)term.print(String.fromCharCode((32 + cy * 16 + cx)))
+//     }
+//     output.refresh();
+// }
+// const endTime = Date.now();
+// console.log(endTime - startTime);
 
 const worker = new Worker('/js/worker.js?s=' + Date.now(), { type: 'module' });
 

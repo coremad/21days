@@ -7,4 +7,5 @@ export interface Output {
     getW(): number;
     getH(): number;
     onResize():void;
+    scrollUp():void;
 }
