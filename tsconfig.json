@@ -109,6 +109,6 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "moduleResolution": "Bundler",
-    "allowSyntheticDefaultImports": true, // Часто идет в комплекте с esModuleInterop
+    "allowSyntheticDefaultImports": true,
   }
 }

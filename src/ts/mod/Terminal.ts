@@ -10,7 +10,7 @@ export class Terminal {
     ctrlCodes = Array(32).fill((str: string) => console.log("wtf char: 0x" + str.charCodeAt(0).toString(16)));
 
     dirtyLines: boolean[] = [];
-    dirty = true;
+    dirty: boolean;
 
     constructor(output: Output, dirty = true) {
         this.output = output;
@@ -30,7 +30,7 @@ export class Terminal {
                 continue;
             }
             this._print(outStr);
-            strPos += this.ctrlCodes[ch.charCodeAt(0)](str.substring(strPos - 1));
+            strPos += this.ctrlCodes[ch.charCodeAt(0)](str.substring(strPos));
             outStr = "";
         }
         this._print(outStr);
@@ -58,6 +58,12 @@ export class Terminal {
         }
     }
 
+    scrollUp() {
+        this.output.scrollUp();
+        this.posX = 0;
+        this.posY = this.height - 1;
+    }
+
     private initCtrl() {
         this.ctrlCodes[0x8] = () => { if (this.posX > 0) this.posX--; return 0 };
         this.ctrlCodes[0x9] = this.tab.bind(this);
@@ -67,7 +73,7 @@ export class Terminal {
     }
 
     private esc(str: string): number {
-        let strPos = 1;
+        let strPos = 0;
         let outStr = '';
         let len = str.length;
         let ch = str[strPos++];
@@ -93,14 +99,14 @@ export class Terminal {
                     break;
                 default: console.log("wtf esc [ : " + ch);
             }
-            return strPos - 1;
+            return strPos;
         } else if (ch == "]") {
             while (strPos < len && ch.charCodeAt(0) != 7) {
                 ch = str[strPos++];
                 outStr += ch;
             }
             document.title = outStr.substring(0, outStr.length - 1).split(";")[1];
-            return strPos - 1;
+            return strPos;
         }
         console.log("esc without ][ 0x" + ch.charCodeAt(0).toString(16));
         return 0;
@@ -112,12 +118,6 @@ export class Terminal {
             this.dirtyLines[this.posY] = false;
         }
         this.output.drawTextAt(s, this.posX, this.posY);
-    }
-
-    scrollUp() {
-        this.output.scrollUp();
-        this.posX = 0;
-        this.posY = this.height - 1;
     }
 
     _print(s: string) {

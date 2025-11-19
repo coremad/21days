@@ -390,7 +390,7 @@ extern "C" {
 EMSCRIPTEN_KEEPALIVE
 #endif
 
-int winWidth = 80, winHeight = 25;
+int winWidth = 80, winHeight = 25, gameState = 0;
 
 static char chrbuf[77 * 1024];
 
@@ -481,7 +481,9 @@ void jend();
 void start() {
   initConsole();
   jinit((void *)CP866ArrayToString, (void *)mprintChar);
+  gameState = 1;
   showMainMenu();
+  gameState = 2;;
   jend();
 }
 

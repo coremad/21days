@@ -57,19 +57,12 @@ mergeInto(LibraryManager.library, {
 
     jend: () => {
         console.log("game over");
+        self.postMessage({ dst: "end" });
     },
 
     jgetWinWH: () => {
         HEAP16[_winWidth >> 1] = winW;
         HEAP16[_winHeight >> 1] = winH;
-    },
-
-    jcls: () => {
-        messager.postMessage({
-            dst: "out",
-            eval: "term.cls()"
-        });
-        gotoReady = true;
     },
 
 });
