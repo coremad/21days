@@ -1,7 +1,9 @@
+import { Output } from "./mod/Output.js";
 import { OutputCanvas } from "./mod/OutputCanvas.js";
+import { OutputHTML } from "./mod/OutputHTML.js";
 import { Terminal } from "./mod/Terminal.js";
 
-const output = new OutputCanvas(document.getElementById('out-container'), 2, true);
+let output: Output = new OutputHTML(document.getElementById('out-container'));
 
 const term = new Terminal(output, false);
 
@@ -18,6 +20,15 @@ window.onresize = function () {
         worker.postMessage({ dst: "size", W: term.width, H: term.height });
     }, 2000);
 };
+
+const outSelector = document.getElementById('outputS');
+if (outSelector) outSelector.onchange = (e) => {
+    const target = e.target as HTMLInputElement;
+    output.derstroy();
+    if (target.value == "html") output = new OutputHTML(document.getElementById('out-container'))
+    else if (target.value == "canvas") output = new OutputCanvas(document.getElementById('out-container'));
+    term.changeOutput(output);
+}
 
 function startWorker(url = '/js/worker.js') {
     const worker = new Worker(url, { type: 'module' });

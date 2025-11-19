@@ -1,6 +1,6 @@
 import { Output } from "./Output.js";
 export class Terminal {
-    output: Output;
+    output: Output = {} as Output;;
 
     width = 80;
     height = 25;
@@ -10,12 +10,16 @@ export class Terminal {
     ctrlCodes = Array(32).fill((str: string) => console.log("wtf char: 0x" + str.charCodeAt(0).toString(16)));
 
     dirtyLines: boolean[] = [];
-    dirty: boolean;
+    dirty = true;
 
-    constructor(output: Output, dirty = true) {
-        this.output = output;
+    constructor(output: Output, dirty = false) {
         this.dirty = dirty;
         this.initCtrl();
+        this.changeOutput(output);
+    }
+
+    public changeOutput(output: Output) {
+        this.output = output;
         this.onResize();
     }
 

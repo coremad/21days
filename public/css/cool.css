@@ -8,9 +8,19 @@ body {
 }
 
 .footer {
+  display: flex;
   position: absolute;
   bottom: 4px;
+}
+
+#finfo {
   background-color: burlywood;
+}
+
+#outputD {
+  position: fixed;
+  left: 4px;
+  background-color: olive;
 }
 
 .out-container {
@@ -26,4 +36,13 @@ body {
 
 .canvas-layer.active {
   visibility: visible;
+}
+
+.html-layer {
+  grid-area: 1 / 1 / 2 / 2;
+  display: none;
+}
+
+.html-layer.active {
+  display: inherit;
 }

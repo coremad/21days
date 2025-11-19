@@ -57,6 +57,10 @@ export class OutputCanvas implements Output {
         this.onResize()
     }
 
+    public derstroy() {
+        for (let el of this.canvas) el.remove();
+    }
+
     public onResize() {
         this.calcSize();
         this.width = this.widthInChars * this.charWidth;
@@ -89,7 +93,7 @@ export class OutputCanvas implements Output {
     public getW() {
         return this.widthInChars;
     };
-    
+
     public getH() {
         return this.heightInChars;
     };
@@ -113,7 +117,6 @@ export class OutputCanvas implements Output {
         let code = chunk << this.chrChunkShift;
         for (let i = 0; i < this.chrChunkSize; i++, code++) {
             chrCtx.fillStyle = this.bcolor;
-            // chrCtx.fillStyle = 'black';
             chrCtx.fillRect(0, 0, this.charWidth, this.charHeight);
             chrCtx.fillStyle = this.tcolor;
             chrCtx.fillText(String.fromCharCode(code), 0, 0);
