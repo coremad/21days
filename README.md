@@ -3,6 +3,8 @@ web wrapper for game "21days" from KolibriOS
 
 запускалка в браузере игры [21 days](https://git.kolibrios.org/nisten/kolibrios/src/branch/main/programs/games/21days) из состава KolibriOS
 
+по мотивам этого [видео](https://youtu.be/-wmaluLx_PI)
+
 ## компиляция
 
 `make`

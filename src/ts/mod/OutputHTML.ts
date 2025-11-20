@@ -119,7 +119,9 @@ export class OutputHTML implements Output {
         if (outText.length < cx) outText += " ".repeat(cx - outText.length);
         outText += text;
         if (outText.length < innerText.length) outText += innerText.substring(outText.length);
-        this.lines[this.workingLayer][cy].innerText = outText.substring(0, this.widthInChars).replace(/ /g, "\u00a0");
+        outText = outText.substring(0, this.widthInChars).replace(/ /g, "\u00a0");
+        if (innerText != outText) this.lines[this.workingLayer][cy].innerText = outText;
+        
         this.needRefresh = true;
     }
 
